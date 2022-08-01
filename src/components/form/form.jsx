@@ -28,12 +28,12 @@ class Form extends React.Component {
       number,
     };
 
-    const check = contacts.find(el => el.name === name);
+    const check = contacts.find(el => el.name.toLowerCase() === name.toLowerCase());
     if (!check) {
       handleSubmit(obj);
       this.reset();
     } else {
-      alert('Error', name + 'is already in contacts', 'Okay');
+      alert(`Error ${name} is already in contacts`);
     }
   };
 
@@ -75,9 +75,10 @@ class Form extends React.Component {
     );
   }
 }
-export default Form;
 
 Form.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   contacts: PropTypes.array.isRequired,
 };
+
+export default Form;

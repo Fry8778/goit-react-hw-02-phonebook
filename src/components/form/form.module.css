@@ -15,8 +15,7 @@
 
 .contacts {
     display: flex;
-    flex-direction: column;  
-
+    flex-direction: column;   
 }
 
 .titlePhone {

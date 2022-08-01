@@ -16,13 +16,19 @@ export class App extends Component {
     }));
   };
   handleChange = e => {
-    const { name, value } = e.currentTarget;
-    this.setState({
-      [name]: value,
-    });
+    this.setState({ filter: e.target.value });
   };
   handleDeleteContacts = id => {
     this.setState({ contacts: this.state.contacts.filter(el => el.id !== id) });
+  };
+
+
+  filterPhonebookContacts = () => {
+    const { contacts, filter } = this.state;
+    const filteredContacts = contacts.filter(el =>
+      el.name.toLowerCase().includes(filter.toLowerCase())
+    );
+    return filteredContacts;
   };
   render() {
     return (
@@ -37,11 +43,13 @@ export class App extends Component {
         <div className={styles.contacts}>
           <h2 className={styles.titleContact}>Contacts</h2>
           <h2 className={styles.titleFind}>find contacts by name</h2>
-          <Filter handleChange={this.handleChange} />
+          <Filter handleChange={this.handleChange} 
+          filter={this.state.filter}
+          />
           <FormPhonebook
-            filter={this.state.filter}
-            contacts={this.state.contacts}
+            contacts={this.filterPhonebookContacts()}
             handleDeleteContacts={this.handleDeleteContacts}
+
           />
         </div>
       </div>
